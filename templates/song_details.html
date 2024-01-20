@@ -1,0 +1,64 @@
+<!-- song_details.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Details - Your Music App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add any additional styles here -->
+</head>
+<body>
+
+<!-- Header Section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">The Music App</a>
+</nav>
+
+<!-- Main Content Section -->
+<div class="container mt-5">
+    <h2 class="mb-4">Song Details</h2>
+
+    <!-- Display Song Details -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ song.title }}</h5>
+            <p class="card-text">Artist: {{ song.artist }}</p>
+            <p class="card-text">Lyrics: {{ song.lyrics }}</p>
+            <!-- Add other song details as needed -->
+
+            <!-- Play MP3 Button (if available) -->
+            {% if song.mp3_binary %}
+                <audio controls>
+                    <source src="{{ url_for('get_mp3', song_id=song.id) }}" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+            {% else %}
+                <p class="text-muted">MP3 file not available.</p>
+            {% endif %}
+
+            <!-- Display Average Rating -->
+            <p class="mt-3">Average Rating: {{ average_rating }}</p>
+
+            <!-- Rate Song Form (if user hasn't rated) -->
+            {% if not has_rated and not is_admin %}
+    <form method="post" action="{{ url_for('rate_song', song_id=song.id) }}">
+        <label for="rating">Rate the Song (1-5):</label>
+        <input type="number" name="rating" min="1" max="5" required>
+        <button type="submit" class="btn btn-primary">Submit Rating</button>
+    </form>
+{% elif not is_admin %}
+    <p class="text-muted">You have already rated this song.</p>
+{% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

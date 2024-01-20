@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Dashboard - Your Music App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Header Section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        The Music App
+    </a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_dashboard') }}">User Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content Section -->
+<div class="container mt-4">
+    <h2>Creator Dashboard</h2>
+
+    <!-- Add Song Form -->
+    <div class="mb-4">
+        <h4>Add New Song</h4>
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('creator_dashboard') }}">
+            {{ form.hidden_tag() }}
+            {{ form.title.label }}
+            {{ form.title(class="form-control") }}
+            {{ form.lyrics.label }}
+            {{ form.lyrics(class="form-control") }}
+            {{ form.mp3.label }}
+            {{ form.mp3(class="form-control") }}
+            <button type="submit" class="btn btn-primary mt-2">Add Song</button>
+        </form>
+    </div>
+
+    <!-- Display Existing Songs -->
+    {% for song in songs %}
+  <div class="song-item">
+    <p>Title: {{ song.title }}</p>
+    <p>Artist: {{ song.artist }}</p>
+    <p>Lyrics: {{ song.lyrics }}</p>
+    <a href="{{ url_for('modify_song', song_id=song.id) }}" class="btn btn-primary">Modify Song</a>
+    <a href="{{ url_for('delete_song', song_id=song.id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this song?')">Delete Song</a>
+  </div>
+{% endfor %}
+<br>
+<div class="mb-4">
+    <h4>Create Album</h4>
+    <a href="{{ url_for('create_album') }}" class="btn btn-success">Create Album</a>
+</div>
+
+<!-- Display Existing Albums -->
+<div class="mt-4">
+    
+    {% for album in albums %}
+        <div class="album-item">
+            <p>Album Name: {{ album.name }}</p>
+            <p>Songs: {% for song in album.songs %}{{ song.title }}, {% endfor %}</p>
+            <a href="{{ url_for('modify_album', album_id=album.id) }}" class="btn btn-primary">Modify Album</a>
+            <a href="{{ url_for('delete_album', album_id=album.id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this album?')">Delete Album</a>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

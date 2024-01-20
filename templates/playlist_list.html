@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Playlists - The Music App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Header Section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        The Music App
+    </a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_dashboard') }}">Back to Dashboard</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content Section -->
+
+<div class="container mt-5">
+    <h2>Playlists</h2>
+
+    {% for playlist in playlists %}
+        <div class="song-entry mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0">
+                    {{ playlist.name }}
+                </p>
+
+                <!-- View and Delete buttons -->
+                <div class="d-flex">
+                    <!-- View button (add your view functionality later) -->
+                    
+                    <form class="d-inline" action="{{ url_for('playlist_songs', playlist_id=playlist.id) }}" method="get">
+                        <button type="submit" class="btn btn-info btn-sm mr-1">View</button>
+                    </form>
+                    <form class="d-inline" action="{{ url_for('add_songs_to_playlist',playlist_id=playlist.id) }}" method="get">
+                        <button type="submit" class="btn btn-info btn-sm mr-1">ADD</button>
+                    </form>
+                    <!-- Delete button -->
+                    <form class="d-inline" action="{{ url_for('delete_playlist', playlist_id=playlist.id) }}" method="get">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Playlist - Your Music App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Header Section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        The Music App
+    </a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('user_dashboard') }}">Back to Dashboard</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content Section -->
+<div class="container mt-4">
+    <h2>Create Playlist</h2>
+
+    <form method="POST" action="{{ url_for('create_playlist') }}">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label for="{{ form.name.id }}">{{ form.name.label }}</label>
+            {{ form.name(class="form-control", placeholder="Enter Playlist Name", required="required") }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.songs.id }}">{{ form.songs.label }}</label>
+            {{ form.songs(class="form-control", multiple="multiple", required="required") }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Playlist</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

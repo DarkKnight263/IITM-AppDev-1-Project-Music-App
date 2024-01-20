@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Admin Dashboard - Your Music App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Header Section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        The Music App
+    </a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Sign Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content Section -->
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Welcome, Admin!</h2>
+
+    <!-- Tiles for Total Users, Total Creators, Total Songs Uploaded, and Total Albums -->
+    <div class="row justify-content-center">
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Creators</h5>
+                    <p class="card-text">{{ total_creators }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Songs Uploaded</h5>
+                    <p class="card-text">{{ total_songs }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Albums</h5>
+                    <p class="card-text">{{ total_albums }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links to the User List, Song List, and Album List pages -->
+    <div class="row mt-3 justify-content-center">
+        <div class="col-md-3 text-center">
+            <a href="{{ url_for('user_list') }}" class="btn btn-primary btn-block">User List</a>
+        </div>
+        <div class="col-md-3 text-center">
+            <a href="{{ url_for('song_list') }}" class="btn btn-primary btn-block">Song List</a>
+        </div>
+        <div class="col-md-3 text-center">
+            <a href="{{ url_for('album_list') }}" class="btn btn-primary btn-block">Album List</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
